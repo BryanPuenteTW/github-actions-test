@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: approval-required
+      name: dev
 
     steps:
       - run: echo "Waiting approval"
