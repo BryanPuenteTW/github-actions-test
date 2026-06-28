@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: install databricks
         run: |
@@ -22,5 +24,6 @@ jobs:
         run: |
           databricks -v
           databricks auth describe
-          databricks catalogs create sp_testing_permissions
+          databricks bundle validate -t dev
+          databricks bundle deploy -t dev
           databricks catalogs list
