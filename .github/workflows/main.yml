@@ -1,4 +1,4 @@
-uname: Databricks testing
+name: Databricks testing
 
 on:
   workflow_dispatch:
