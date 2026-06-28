@@ -21,4 +21,5 @@ jobs:
           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
         run: |
           databricks -v
-          databricks auth describe --debug
+          databricks auth describe
+          databricks catalogs list
