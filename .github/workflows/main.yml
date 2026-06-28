@@ -1,4 +1,4 @@
-name: CSV Approval Flow
+name: Databricks testing
 
 on:
   workflow_dispatch:
@@ -21,3 +21,4 @@ jobs:
           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
         run: |
           databricks -v
+          databricks auth describe
