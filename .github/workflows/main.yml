@@ -9,39 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Generate CSV
+
+      - name: install databricks
         run: |
-          echo "id,name" > data.csv
-          echo "1,Juan" >> data.csv
-          echo "2,Ana" >> data.csv
-
-      - name: Upload CSV artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: csv-data
-          path: data.csv
-
-  approval:
-    needs: generate-csv
-    runs-on: ubuntu-latest
-
-    environment:
-      name: dev
-
-    steps:
-      - run: echo "Waiting approval"
-
-  process-csv:
-    needs: approval
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download CSV
-        uses: actions/download-artifact@v4
-        with:
-          name: csv-data
-
-      - name: Process CSV
+          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+        
+      - name: Databricks Auth
         run: |
-          cat data.csv
-          echo "Processing approved CSV..."
+          databricks -v
