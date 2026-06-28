@@ -22,4 +22,5 @@ jobs:
         run: |
           databricks -v
           databricks auth describe
+          databricks catalogs create sp_testing_permissions
           databricks catalogs list
