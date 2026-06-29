@@ -25,5 +25,5 @@ jobs:
           databricks -v
           databricks auth describe --debug
           databricks bundle validate -t dev
-          databricks bundle deploy -t dev
+          databricks bundle destroy -t dev --auto-approve
           databricks catalogs list
