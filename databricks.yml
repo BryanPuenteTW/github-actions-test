@@ -18,6 +18,7 @@ resources:
           description: >
             Computes the MEIO target delta report from the supply_chain_oracle_raw
             band quantity port using Delta time travel for the previous snapshot.
+          environment_key: Default
           spark_python_task:
             python_file: ${workspace.file_path}/src/meio_target_report/compute_port.py
             source: WORKSPACE
