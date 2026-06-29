@@ -2,7 +2,7 @@ bundle:
   name: testing-sp
 
 workspace:
-  host: https://adb-7405616448924818.18.azuredatabricks.net
+  host: https://adb-7405609864615634.14.azuredatabricks.net
 
 targets:
   dev:
