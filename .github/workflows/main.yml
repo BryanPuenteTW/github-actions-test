@@ -6,7 +6,7 @@ on:
 jobs:
 
   generate-csv:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -25,5 +25,5 @@ jobs:
           databricks -v
           databricks auth describe --debug
           databricks bundle validate -t dev
-          databricks bundle destroy -t dev --auto-approve
+          databricks bundle deploy -t dev
           databricks catalogs list
