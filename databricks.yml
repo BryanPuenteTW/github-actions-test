@@ -13,6 +13,10 @@ resources:
   jobs:
     testing_sp_compute:
       name: "Testing SP Compute"
+      environments:
+        - environment_key: Default
+          spec:
+            client: "1"
       tasks:
         - task_key: compute_port
           description: >
