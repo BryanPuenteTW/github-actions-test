@@ -8,11 +8,15 @@ jobs:
   generate-csv:
     runs-on: ubuntu-24.04
 
+    #env:
+    #  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+    #  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    #  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    #  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
     env:
-      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
 
     steps:
       - name: Checkout code
