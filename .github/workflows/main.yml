@@ -13,10 +13,6 @@ jobs:
     #  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
     #  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
     #  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-    env:
-      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
-      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
 
     steps:
       - name: Checkout code
@@ -27,6 +23,11 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
         
       - name: Databricks Auth
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         #env:
         #  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         #  DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
