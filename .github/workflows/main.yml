@@ -29,6 +29,7 @@ jobs:
         #  DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
         run: |
           databricks -v
+          databricks auth describe --host $DATABRICKS_HOST
           databricks auth describe --debug
           databricks bundle validate -t dev
           databricks bundle destroy -t dev --auto-approve
