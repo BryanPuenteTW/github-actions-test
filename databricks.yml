@@ -1,0 +1,30 @@
+bundle:
+  name: testing-sp
+
+workspace:
+  host: https://adb-7405609864615634.14.azuredatabricks.net
+
+targets:
+  dev:
+    workspace:
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+
+resources:
+  jobs:
+    testing_sp_compute:
+      name: "Testing SP Compute"
+      environments:
+        - environment_key: Default
+          spec:
+            client: "1"
+      tasks:
+        - task_key: compute_port
+          description: >
+            Computes the MEIO target delta report from the supply_chain_oracle_raw
+            band quantity port using Delta time travel for the previous snapshot.
+          environment_key: Default
+          spark_python_task:
+            python_file: ${workspace.file_path}/src/meio_target_report/compute_port.py
+            source: WORKSPACE
+            parameters:
+              - "--input-contract"

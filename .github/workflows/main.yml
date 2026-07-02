@@ -1,0 +1,41 @@
+name: Databricks testing
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  generate-csv:
+    runs-on: ubuntu-24.04
+
+    #env:
+    #  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+    #  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    #  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    #  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: install databricks
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+        
+      - name: Databricks Auth
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        #env:
+        #  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        #  DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+        #  DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+        run: |
+          databricks -v
+          databricks auth env --host $DATABRICKS_HOST
+          databricks auth describe --debug
+          databricks bundle validate -t dev
+          databricks bundle destroy -t dev --auto-approve
+          databricks catalogs list

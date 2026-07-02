@@ -1,0 +1,27 @@
+name: Databricks testing SVC
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  generate-csv:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: install databricks
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+        
+      - name: Databricks Auth
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_USERNAME: ${{ secrets.DATABRICKS_USERNAME }}
+          DATABRICKS_PASSWORD: ${{ secrets.DATABRICKS_PASSWORD }}
+        run: |
+          databricks -v
+          databricks auth describe --debug
+          databricks catalogs list
